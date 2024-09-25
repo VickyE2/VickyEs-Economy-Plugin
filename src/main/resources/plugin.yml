@@ -1,0 +1,32 @@
+name: VickyE-EP
+version: '1.0.0-TENz'
+main: org.vicky.vickys_EP.VickysEconomyPlugin
+api-version: '1.20'
+prefix: Vs-EP
+authors: [ VickyE2 ]
+description: An addon for more functionality to Vault Economy
+softdepend:
+  - ItemsAdder
+  - Essentials
+  - EssentialsChat
+depend:
+  - PlaceholderAPI
+  - Vault
+  - Vicky-s_Utilities
+permissions:
+  vep.admin:
+    description: Allows access to all VickyE's Economy Plugin commands
+    default: op
+commands:
+  vep_bank:
+    description: "Main bank command"
+    usage: "/<command>"
+    aliases: [bank, vickysep_bank]
+    permission: vep.admin
+    permission-message: "Are you a bank worker? No? Exactly"
+  config:
+    description: "Main economy plugin config command"
+    usage: "/<command> <args>"
+    aliases: [ vep_config, veconfig ]
+    permission: vep.admin
+    permission-message: "You don't even know how to use ymls ToT"
