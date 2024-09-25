@@ -27,6 +27,6 @@ commands:
   config:
     description: "Main economy plugin config command"
     usage: "/<command> <args>"
-    aliases: [ vep_config, veconfig ]
+    aliases: [vep_config, veconfig]
     permission: vep.admin
     permission-message: "You don't even know how to use ymls ToT"
