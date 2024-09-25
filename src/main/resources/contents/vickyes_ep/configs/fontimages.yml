@@ -1,0 +1,23 @@
+info:
+  namespace: vickyes_ep
+font_images:
+  gold_coin_unanimated:
+    path: items/currency/gold_coin_unanimated
+    suggest_in_command: true
+    y_position: 7
+    scale_ratio: 9
+  silver_coin_unanimated:
+    path: items/currency/silver_coin_unanimated
+    suggest_in_command: true
+    y_position: 7
+    scale_ratio: 9
+  copper_coin_unanimated:
+    path: items/currency/copper_coin_unanimated
+    suggest_in_command: true
+    y_position: 7
+    scale_ratio: 9
+  tin_coin_unanimated:
+    path: items/currency/tin_coin_unanimated
+    suggest_in_command: true
+    y_position: 7
+    scale_ratio: 9

@@ -1,0 +1,19 @@
+info:
+  namespace: vickyes_ep
+font_images:
+  oak_bank_gui_empty:
+    path: gui/oak/oak_bank_gui_empty.png
+    suggest_in_command: false
+    y_position: 27
+  oak_bank_gui_main:
+    path: gui/oak/oak_bank_gui_main.png
+    suggest_in_command: false
+    y_position: 27
+  oak_bank_gui_deposit:
+    path: gui/oak/oak_bank_gui_deposit.png
+    suggest_in_command: false
+    y_position: 27
+  oak_bank_gui_withdraw:
+    path: gui/oak/oak_bank_gui_withdraw.png
+    suggest_in_command: false
+    y_position: 27

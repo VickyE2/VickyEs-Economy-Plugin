@@ -1,0 +1,52 @@
+info:
+  namespace: vickyes_ep
+items:
+  # coins for currency
+  gold_coin:
+    display_name: Gold Coin
+    resource:
+      material: GOLD_INGOT
+      generate: true
+      textures:
+        - items/currency/gold_coin_animated
+  silver_coin:
+    display_name: Silver Coin
+    resource:
+      material: IRON_INGOT
+      generate: true
+      textures:
+        - items/currency/silver_coin_animated
+  copper_coin:
+    display_name: Copper Coin
+    resource:
+      material: COPPER_INGOT
+      generate: true
+      textures:
+        - items/currency/copper_coin_animated
+  tin_coin:
+    display_name: Tin Coin
+    resource:
+      material: IRON_NUGGET
+      generate: true
+      textures:
+        - items/currency/tin_coin_animated
+
+  # buttons for gui
+  oak_balance_button:
+    display_name: balance_button
+    resource:
+      material: GREEN_STAINED_GLASS_PANE
+      generate: false
+      model_path: oak/oak_balance_button
+  oak_interest_button:
+    display_name: interest_button
+    resource:
+      material: GREEN_STAINED_GLASS_PANE
+      generate: false
+      model_path: oak/oak_interest_button
+  oak_dnw_button:
+    display_name: dnw_button
+    resource:
+      material: GREEN_STAINED_GLASS_PANE
+      generate: false
+      model_path: oak/oak_dnw_button
