@@ -3,8 +3,8 @@ package org.vicky.vickys_EP.utils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.v_utls.items_adder.FontImageSender;
-import org.v_utls.utilities.HexGenerator;
+import org.vicky.items_adder.FontImageSender;
+import org.vicky.utilities.HexGenerator;
 
 import java.util.Objects;
 

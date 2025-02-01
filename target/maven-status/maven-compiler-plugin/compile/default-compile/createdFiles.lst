@@ -10,5 +10,6 @@ org\vicky\vickys_EP\VickysEconomyPlugin.class
 org\vicky\vickys_EP\config\Config.class
 org\vicky\vickys_EP\guis\BankDeposit.class
 org\vicky\vickys_EP\utils\DepositChecker.class
-org\vicky\vickys_EP\utils\ConfigManager.class
+org\vicky\vickys_EP\utils\InterestObserver.class
 org\vicky\vickys_EP\guis\BankGuiMain.class
+org\vicky\vickys_EP\guis\BankInterest.class

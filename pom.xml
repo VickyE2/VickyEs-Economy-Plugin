@@ -12,7 +12,7 @@
     <name>VickyEs_Economy_Plugin</name>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -21,25 +21,17 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <resources>
@@ -83,7 +75,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.example.vicky_utils</groupId>
+            <groupId>org.vicky.vicky_utils</groupId>
             <artifactId>v-utls</artifactId>
             <version>0.0.1-BETA</version>
             <scope>provided</scope>
@@ -99,11 +91,6 @@
             <artifactId>LoneLibs</artifactId>
             <version>1.0.58</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spongepowered</groupId>
-            <artifactId>configurate-yaml</artifactId>
-            <version>4.1.2</version>
         </dependency>
     </dependencies>
 </project>
