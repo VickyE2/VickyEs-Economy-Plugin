@@ -6,10 +6,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.v_utls.guiparent.ButtonAction;
-import org.v_utls.listeners.BaseGuiListener;
-import org.v_utls.guiparent.GuiCreator;
-import org.v_utls.utilities.ANSIColor;
+import org.vicky.guiparent.ButtonAction;
+import org.vicky.listeners.BaseGuiListener;
+import org.vicky.guiparent.GuiCreator;
+import org.vicky.utilities.ANSIColor;
 import org.vicky.vickys_EP.VickysEconomyPlugin;
 
 import java.util.HashMap;

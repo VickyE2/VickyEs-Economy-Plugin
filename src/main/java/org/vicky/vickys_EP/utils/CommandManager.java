@@ -11,7 +11,7 @@ import org.vicky.vickys_EP.VickysEconomyPlugin;
 import org.vicky.vickys_EP.config.Config;
 import org.vicky.vickys_EP.guis.BankGuiMain;
 
-import static org.vicky.vickys_EP.global.Utils.config;
+import static org.vicky.vickys_EP.global.Utils.manager;
 
 public class CommandManager implements CommandExecutor {
 
@@ -24,7 +24,7 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (command.getName().equalsIgnoreCase("vep_bank")) {
-            if (config.getBooleanValue("Main_Configurations.Bank_is_Enabled")) {
+            if (manager.getBooleanValue("Main.Bank.isEnabled")) {
                 if (sender instanceof Player player) {
                     BankGuiMain bankGuiMain = new BankGuiMain(plugin);
                     bankGuiMain.showGui(player);
@@ -36,12 +36,13 @@ public class CommandManager implements CommandExecutor {
             }
         } else if(command.getName().equalsIgnoreCase("config")){
             if ((args.length > 0 && args[0].equalsIgnoreCase("generate"))){
-                Config config1 = new Config(plugin);
-                config1.registerConfigs();
-                config.reloadPluginConfig();
+                manager.loadConfigValues();
+                Config config = new Config(plugin);
+                config.registerConfigs();
+                manager.saveConfig();
                 sender.sendMessage("Config has generated all values.");
             }else if ((args.length > 0 && args[0].equalsIgnoreCase("reload"))){
-                config.reloadPluginConfig();
+                manager.loadConfigValues();
                 sender.sendMessage("Config values have been reloaded");
             }
         }else {

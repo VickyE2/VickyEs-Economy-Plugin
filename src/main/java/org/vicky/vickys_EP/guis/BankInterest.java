@@ -16,14 +16,14 @@ import org.vicky.vickys_EP.utils.ReturnPlayerValueFormatted;
 
 import static org.vicky.vickys_EP.global.Listeners.mainBankGuiListener;
 
-public class BankGuiMain extends BaseGui{
+public class BankInterest extends BaseGui{
     private final GuiCreator guiManager;
     ReturnPlayerValueFormatted playerValueFormatted = new ReturnPlayerValueFormatted(VickysEconomyPlugin.getEconomy());
     private final MainBankGuiListener listener;
     private final JavaPlugin plugin;
     boolean itemsAdderEnabled = false;
 
-    public BankGuiMain(JavaPlugin plugin) {
+    public BankInterest(JavaPlugin plugin) {
         // Pass the listener to the superclass constructor
         super(plugin, mainBankGuiListener);
 
@@ -70,7 +70,7 @@ public class BankGuiMain extends BaseGui{
                         "vickyes_ep:oak_interest_button",
                         null
                 );
-                listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankGuiMain.class, plugin, true), 9, IAInterestButton);
+                listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankInterest.class, plugin, true), 9, IAInterestButton);
 
                 IADnWButton = new GuiCreator.ItemConfig(
                         null,

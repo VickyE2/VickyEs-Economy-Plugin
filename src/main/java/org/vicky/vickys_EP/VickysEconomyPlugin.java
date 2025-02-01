@@ -6,14 +6,15 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.v_utls.utilities.ANSIColor;
-import org.v_utls.utilities.FileManager;
-import org.v_utls.vicky_utils;
+import org.vicky.utilities.ANSIColor;
+import org.vicky.utilities.ConfigManager;
+import org.vicky.utilities.FileManager;
 import org.vicky.vickys_EP.Listeners.MainBankGuiListener;
 import org.vicky.vickys_EP.Listeners.MainDepositAndWithdrawListener;
-import org.vicky.vickys_EP.global.Listeners;
+import org.vicky.vickys_EP.config.Config;
 import org.vicky.vickys_EP.utils.CommandManager;
 import org.vicky.vickys_EP.utils.DepositChecker;
+import org.vicky.vickys_EP.utils.InterestObserver;
 import org.vicky.vickys_EP.utils.WithdrawChecker;
 
 import java.util.Arrays;
@@ -22,8 +23,7 @@ import java.util.Objects;
 
 import static org.vicky.vickys_EP.global.Listeners.mainBankGuiListener;
 import static org.vicky.vickys_EP.global.Listeners.mainDepositAndWithdrawListener;
-import static org.vicky.vickys_EP.global.Utils.depositChecker;
-import static org.vicky.vickys_EP.global.Utils.withdrawChecker;
+import static org.vicky.vickys_EP.global.Utils.*;
 
 public final class VickysEconomyPlugin extends JavaPlugin {
 
@@ -63,6 +63,8 @@ public final class VickysEconomyPlugin extends JavaPlugin {
                 } else {
                     Objects.requireNonNull(getCommand("vep_bank")).setExecutor(new CommandManager(this));
                     getLogger().info("/vep_bank command registered.");
+                    Objects.requireNonNull(getCommand("config")).setExecutor(new CommandManager(this));
+                    getLogger().info("/config command registered.");
                 }
             } catch (Exception e) {
                 getLogger().severe("An error occurred: " + e.getMessage());
@@ -73,6 +75,13 @@ public final class VickysEconomyPlugin extends JavaPlugin {
             mainDepositAndWithdrawListener = new MainDepositAndWithdrawListener(this);
             depositChecker = new DepositChecker(this);
             withdrawChecker = new WithdrawChecker(this);
+            manager = new ConfigManager(this, "config.yml");
+            Config config = new Config(this);
+            config.registerConfigs();
+
+            InterestObserver observer = new InterestObserver(this);
+            observer.Interest();
+
             getServer().getPluginManager().registerEvents(mainBankGuiListener, this);
             getServer().getPluginManager().registerEvents(mainDepositAndWithdrawListener, this);
 
