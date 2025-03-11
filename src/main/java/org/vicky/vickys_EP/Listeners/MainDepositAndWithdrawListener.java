@@ -19,19 +19,60 @@ import org.vicky.vickys_EP.global.Utils;
 import java.util.*;
 
 public class MainDepositAndWithdrawListener extends BaseGuiListener {
-
     private final Map<Integer, ButtonAction> buttonActions = new HashMap<>();
     private final Map<Integer, List<ItemStack>> validItemSlots = new HashMap<>();
     private final Map<Integer, List<String>> validCustomItemSlots = new HashMap<>();
     private final Set<Integer> clickableSlots = new HashSet<>();
-    private Inventory guiInventory = null;
-    private final VickysEconomyPlugin plugin;
-
-    private long lastClickTime = 0;
-    private static final long CLICK_DELAY = 200; // Milliseconds
 
     public MainDepositAndWithdrawListener(VickysEconomyPlugin plugin) {
-        this.plugin = plugin;
+        super(plugin);
+        addInventoryClickHandler(event -> {
+            Player player = (Player) event.getWhoClicked();
+            int slot = event.getSlot();
+
+            if (buttonActions.containsKey(slot)) {
+                ButtonAction action = buttonActions.get(slot);
+                action.execute(player, plugin);
+            }
+
+            if (clickableSlots.contains(slot) || buttonActions.containsKey(slot)) {
+                if (validItemSlots.containsKey(slot) || validCustomItemSlots.containsKey(slot)) {
+                    ItemStack itemStackInSlot = event.getInventory().getItem(slot);
+
+                    if (itemStackInSlot != null) {
+                        CustomStack itemInContact = CustomStack.byItemStack(itemStackInSlot);
+
+                        boolean isValid = false;  // Declare `isValid` before the loop
+                        for (String namespace : validCustomItemSlots.get(slot)) {
+                            if (itemInContact != null && itemInContact.getNamespacedID().equals(namespace)) {
+                                isValid = true;
+                                break;  // If valid, exit loop
+                            }
+                        }
+
+                        // Now you can use `isValid` to take action
+                        if (!isValid) {
+                            // Handle the case where the item is not valid
+                            // Example: Send a message, cancel the action, etc.
+                            player.sendMessage(ChatColor.RED + "Invalid coin in slot " + slot);
+                            event.setCancelled(true);
+                        } else {
+                            // Handle the valid case, e.g., process the item
+                            event.setCancelled(false);
+                        }
+                    }
+
+
+                }
+            }else {
+                player.sendMessage(ChatColor.RED + "This slot is not clickable!");
+            }
+        });
+        addInventoryCloseHandler(event -> {
+                buttonActions.remove(event.getInventory());
+                validItemSlots.remove(event.getInventory());
+                clickableSlots.remove(event.getInventory());
+        });
     }
 
     private Set<Integer> parseSlots(String slotRange, int width) {
@@ -54,140 +95,29 @@ public class MainDepositAndWithdrawListener extends BaseGuiListener {
         return slots;
     }
 
-    public void registerClickableSlots(String slotRange, int guiWidth) {
-        Set<Integer> slots = parseSlots(slotRange, guiWidth);
+    public void registerClickableSlots(String slotRange) {
+        Set<Integer> slots = parseSlots(slotRange, 9);
         clickableSlots.addAll(slots);
         Bukkit.getLogger().info(ANSIColor.colorize("Registered clickable slots: " + slots, ANSIColor.CYAN));
     }
 
-    public void registerValidItemSlots(String slotRange, int guiWidth, ItemStack... itemStacks) {
-        Set<Integer> slots = parseSlots(slotRange, guiWidth);
+    public void registerValidItemSlots(String slotRange, ItemStack... itemStacks) {
+        Set<Integer> slots = parseSlots(slotRange, 9);
         for (int slot : slots) {
             validItemSlots.put(slot, new ArrayList<>(List.of(itemStacks)));
         }
         Bukkit.getLogger().info(ANSIColor.colorize("Registered valid item slots for items: " + Arrays.toString(itemStacks) + " in slots: " + slots, ANSIColor.CYAN));    }
-    public void registerCustomValidItemSlots(String slotRange, int guiWidth, String... customStacks) {
-        Set<Integer> slots = parseSlots(slotRange, guiWidth);
+    public void registerCustomValidItemSlots(String slotRange, String... customStacks) {
+        Set<Integer> slots = parseSlots(slotRange, 9);
         for (int slot : slots) {
             validCustomItemSlots.put(slot, new ArrayList<>(List.of(customStacks)));
         }
         Bukkit.getLogger().info(ANSIColor.colorize("Registered valid item slots for items: " + Arrays.toString(customStacks) + " in slots: " + slots, ANSIColor.CYAN));    }
 
-    @Override
-    public void setGuiInventory(Inventory guiInventory) {
-        if (guiInventory == null) {
-            Bukkit.getLogger().warning("GUI inventory is being set to null! Make sure to initialize it before use.");
-        }
-        Bukkit.getLogger().info(ANSIColor.colorize("Inventory [Depo-With] has been set to: " + guiInventory, ANSIColor.CYAN));
-        this.guiInventory = guiInventory;
-    }
-
-    public Inventory getGuiInventory() {
-        if (guiInventory == null) {
-            Bukkit.getLogger().warning("There is no Inventory");
-            return null;
-        }
-        Bukkit.getLogger().info(ANSIColor.colorize("Inventory is currently: " + guiInventory, ANSIColor.CYAN));
-        return guiInventory;
-
-    }
-
-    public void registerButton(ButtonAction action, int GuiWidth, GuiCreator.ItemConfig... itemConfigs) {
-        Bukkit.getLogger().info(ANSIColor.colorize("Button has been registered with Action " + action.getActionType() + " and action data: " + action.getActionData(), ANSIColor.CYAN));
-        for (GuiCreator.ItemConfig itemConfig : itemConfigs) {
-            Set<Integer> slotSet = parseSlots(itemConfig.getSlotRange(), GuiWidth);
-            for (int slot : slotSet) {
-                buttonActions.put(slot, action);
-            }
-        }
-    }
 
     public void registerADSBButton(ButtonAction action, int slot) {
         Bukkit.getLogger().info(ANSIColor.colorize("Button has been registered with Action " + action.getActionType() + " and action data: " + action.getActionData(), ANSIColor.CYAN));
         buttonActions.put(slot, action);
 
-    }
-
-    @Override
-    @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getClickedInventory() != guiInventory) {
-            event.setCancelled(false);
-            return;
-        }
-        if (event.getClickedInventory() == null) return;
-
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastClickTime < CLICK_DELAY) {
-            event.setCancelled(true); // Cancel the event to prevent processing
-            return; // Ignore this click
-        }
-        lastClickTime = currentTime;
-
-        if (guiInventory == null) {
-            event.setCancelled(false);
-            Bukkit.getLogger().warning("Attempted to click an inventory, but guiInventory is null!  [Depo-With]");
-            return;
-        }
-
-
-
-        event.setCancelled(true);
-        Player player = (Player) event.getWhoClicked();
-        int slot = event.getSlot();
-
-        if (buttonActions.containsKey(slot)) {
-            ButtonAction action = buttonActions.get(slot);
-            action.execute(player, plugin);
-        }
-
-        if (clickableSlots.contains(slot) || buttonActions.containsKey(slot)) {
-            if (validItemSlots.containsKey(slot) || validCustomItemSlots.containsKey(slot)) {
-                ItemStack itemStackInSlot = guiInventory.getItem(slot);
-
-                if (itemStackInSlot != null) {
-                    CustomStack itemInContact = CustomStack.byItemStack(itemStackInSlot);
-
-                    boolean isValid = false;  // Declare `isValid` before the loop
-                    for (String namespace : validCustomItemSlots.get(slot)) {
-                        if (itemInContact != null && itemInContact.getNamespacedID().equals(namespace)) {
-                            isValid = true;
-                            break;  // If valid, exit loop
-                        }
-                    }
-
-                    // Now you can use `isValid` to take action
-                    if (!isValid) {
-                        // Handle the case where the item is not valid
-                        // Example: Send a message, cancel the action, etc.
-                        player.sendMessage(ChatColor.RED + "Invalid coin in slot " + slot);
-                        event.setCancelled(true);
-                    } else {
-                        // Handle the valid case, e.g., process the item
-                        event.setCancelled(false);
-                    }
-                }
-
-
-            }
-        }else {
-                player.sendMessage(ChatColor.RED + "This slot is not clickable!");
-        }
-    }
-
-    @Override
-    @EventHandler
-    public void onInventoryClose(InventoryCloseEvent event) {
-        if (event.getInventory() == guiInventory) {
-            buttonActions.clear();
-            validItemSlots.clear();
-            clickableSlots.clear();
-            setGuiInventory(null);
-        }
-    }
-
-    private boolean isSameItem(ItemStack item1, ItemStack item2) {
-        if (item1 == null || item2 == null) return false;
-        return item1.isSimilar(item2);
     }
 }

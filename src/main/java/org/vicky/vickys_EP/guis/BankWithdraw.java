@@ -15,10 +15,7 @@ import org.vicky.vickys_EP.VickysEconomyPlugin;
 import org.vicky.vickys_EP.global.Utils;
 import org.vicky.vickys_EP.utils.DepositChecker;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.vicky.vickys_EP.global.Listeners.mainDepositAndWithdrawListener;
 import static org.vicky.vickys_EP.global.Utils.withdrawChecker;
@@ -66,9 +63,9 @@ public class BankWithdraw extends BaseGui {
                     true,
                     null,
                     "vicky_utls:green_swap_button",
-                    null
+                    new ArrayList<>(),
+                    new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankDeposit.class, plugin, true)
             );
-            listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankDeposit.class, plugin, true), 9, IASwapButton);
 
             IAAddButton = new GuiCreator.ItemConfig(
                     null,
@@ -77,6 +74,7 @@ public class BankWithdraw extends BaseGui {
                     true,
                     null,
                     "vicky_utls:green_add_button",
+                    new ArrayList<>(),
                     null
             );
             IASUBButton = new GuiCreator.ItemConfig(
@@ -86,6 +84,7 @@ public class BankWithdraw extends BaseGui {
                     true,
                     null,
                     "vicky_utls:red_sub_button",
+                    new ArrayList<>(),
                     null
             );
             IAWithdrawButton = new GuiCreator.ItemConfig(
@@ -95,6 +94,7 @@ public class BankWithdraw extends BaseGui {
                     true,
                     null,
                     "vicky_utls:green_arrow_right",
+                    new ArrayList<>(),
                     null
             );
 
@@ -128,10 +128,11 @@ public class BankWithdraw extends BaseGui {
                     true,
                     null,
                     "vicky_utls:player_head_gui_size_1",
-                    lore
+                    lore,
+                    null
             );
-            listener.registerClickableSlots("7,16,25,34,6,15,24,33,31", 9);
-            listener.registerCustomValidItemSlots("9,10,18,19,11,12,20,21,14,15,23,24,16,17,25,26", 9,
+            listener.registerClickableSlots("7,16,25,34,6,15,24,33,31");
+            listener.registerCustomValidItemSlots("9,10,18,19,11,12,20,21,14,15,23,24,16,17,25,26",
                     "vickyes_ep:gold_coin",
                     "vickyes_ep:silver_coin",
                     "vickyes_ep:copper_coin",
@@ -145,6 +146,7 @@ public class BankWithdraw extends BaseGui {
                 false,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig BalanceButton = new GuiCreator.ItemConfig(
@@ -154,6 +156,7 @@ public class BankWithdraw extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig InterestButton = new GuiCreator.ItemConfig(
@@ -163,6 +166,7 @@ public class BankWithdraw extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig DepositnWithdrawButton = new GuiCreator.ItemConfig(
@@ -172,6 +176,7 @@ public class BankWithdraw extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
 

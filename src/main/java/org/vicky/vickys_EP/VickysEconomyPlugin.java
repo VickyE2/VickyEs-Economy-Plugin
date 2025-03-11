@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.vicky.utilities.ANSIColor;
 import org.vicky.utilities.ConfigManager;
 import org.vicky.utilities.FileManager;
+import org.vicky.vicky_utils;
 import org.vicky.vickys_EP.Listeners.MainBankGuiListener;
 import org.vicky.vickys_EP.Listeners.MainDepositAndWithdrawListener;
 import org.vicky.vickys_EP.config.Config;
@@ -37,17 +38,26 @@ public final class VickysEconomyPlugin extends JavaPlugin {
     }
 
     @Override
+    public void onLoad() {
+        vicky_utils.hookDependantPlugin(this, this.getClassLoader());
+    }
+
+    @Override
     public void onEnable() {
         getLogger().info(ANSIColor.colorize("VickyE's Economy Plugin is Being Enabled", ANSIColor.PURPLE_BOLD));
         // Plugin startup logic
         if (Bukkit.getPluginManager().getPlugin("Vicky-s_Utilities") != null){
-
-            if (!setupEconomy() ) {
+            this.getDataFolder().mkdirs();
+            if (!setupEconomy()) {
                 getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
                 getServer().getPluginManager().disablePlugin(this);
                 return;
             }
-            setupPermissions();
+            if (!setupPermissions()) {
+                getLogger().severe(String.format("[%s] - Disabled due to no Vault Permission failure!", getDescription().getName()));
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
 
             if (Bukkit.getPluginManager().getPlugin("ItemsAdder") != null){
                 FileManager fileManager = new FileManager(this);
@@ -94,6 +104,7 @@ public final class VickysEconomyPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        vicky_utils.unhookDependantPlugin(this);
     }
 
 

@@ -15,6 +15,7 @@ import org.vicky.vickys_EP.VickysEconomyPlugin;
 import org.vicky.vickys_EP.global.Utils;
 import org.vicky.vickys_EP.utils.DepositChecker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,13 +64,13 @@ public class BankDeposit extends BaseGui {
                     true,
                     null,
                     "vicky_utls:green_arrow_right",
-                    null
+                    new ArrayList<>(),
+                    new ButtonAction(Dplayer -> {
+                        Dplayer.sendMessage("Trying to Deposit");
+                        List<Integer> coinSlots = Arrays.asList(17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35);
+                        depositChecker.depositCoins(Dplayer, coinSlots, 13,  true);  // This allows passing parameters
+                    }, false)
             );
-            listener.registerButton(new ButtonAction(Dplayer -> {
-                Dplayer.sendMessage("Trying to Deposit");
-                List<Integer> coinSlots = Arrays.asList(17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35);
-                depositChecker.depositCoins(Dplayer, coinSlots, 13,  true);  // This allows passing parameters
-            }, false), 9, IADepositButton);
 
             IASwapButton = new GuiCreator.ItemConfig(
                     null,
@@ -78,9 +79,9 @@ public class BankDeposit extends BaseGui {
                     true,
                     null,
                     "vicky_utls:green_swap_button",
-                    null
+                    new ArrayList<>(),
+                    new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankWithdraw.class, plugin, true)
             );
-            listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankWithdraw.class, plugin, true), 9, IASwapButton);
 
 
             List<String> lore = Arrays.asList(
@@ -97,10 +98,11 @@ public class BankDeposit extends BaseGui {
                     true,
                     null,
                     "vicky_utls:player_head_gui_size_1",
-                    lore
+                    lore,
+                    null
             );
-            listener.registerClickableSlots("1,10,19,28,9,18,27,36", 9);
-            listener.registerCustomValidItemSlots("1,10,19,28,9,18,27,36", 9,
+            listener.registerClickableSlots("1,10,19,28,9,18,27,36");
+            listener.registerCustomValidItemSlots("1,10,19,28,9,18,27,36",
                     "vickyes_ep:gold_coin",
                     "vickyes_ep:silver_coin",
                     "vickyes_ep:copper_coin",
@@ -114,6 +116,7 @@ public class BankDeposit extends BaseGui {
                 false,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig BalanceButton = new GuiCreator.ItemConfig(
@@ -123,6 +126,7 @@ public class BankDeposit extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig InterestButton = new GuiCreator.ItemConfig(
@@ -132,6 +136,7 @@ public class BankDeposit extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig DepositnWithdrawButton = new GuiCreator.ItemConfig(
@@ -141,6 +146,7 @@ public class BankDeposit extends BaseGui {
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
 

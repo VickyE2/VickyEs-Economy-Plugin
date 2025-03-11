@@ -14,6 +14,8 @@ import org.vicky.vickys_EP.Listeners.MainBankGuiListener;
 import org.vicky.vickys_EP.VickysEconomyPlugin;
 import org.vicky.vickys_EP.utils.ReturnPlayerValueFormatted;
 
+import java.util.ArrayList;
+
 import static org.vicky.vickys_EP.global.Listeners.mainBankGuiListener;
 
 public class BankInterest extends BaseGui{
@@ -57,9 +59,9 @@ public class BankInterest extends BaseGui{
                         true,
                         null,
                         "vickyes_ep:oak_balance_button",
-                        null
+                        new ArrayList<>(),
+                        new ButtonAction(player1 -> playerValueFormatted.LogAll(player1), true)
                 );
-                listener.registerButton(new ButtonAction(player1 -> playerValueFormatted.LogAll(player1), true), 9, IABalanceButton);
 
                 IAInterestButton = new GuiCreator.ItemConfig(
                         null,
@@ -68,9 +70,9 @@ public class BankInterest extends BaseGui{
                         true,
                         null,
                         "vickyes_ep:oak_interest_button",
-                        null
+                        new ArrayList<>(),
+                        new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankInterest.class, plugin, true)
                 );
-                listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankInterest.class, plugin, true), 9, IAInterestButton);
 
                 IADnWButton = new GuiCreator.ItemConfig(
                         null,
@@ -79,9 +81,9 @@ public class BankInterest extends BaseGui{
                         true,
                         null,
                         "vickyes_ep:oak_dnw_button",
-                        null
+                        new ArrayList<>(),
+                        new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankDeposit.class, plugin, true)
                 );
-                listener.registerButton(new ButtonAction(ButtonAction.ActionType.OPEN_GUI, BankDeposit.class, plugin, true), 9, IADnWButton);
 
             }
         }
@@ -93,6 +95,7 @@ public class BankInterest extends BaseGui{
                 false,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig BalanceButton = new GuiCreator.ItemConfig(
@@ -102,6 +105,7 @@ public class BankInterest extends BaseGui{
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig InterestButton = new GuiCreator.ItemConfig(
@@ -111,6 +115,7 @@ public class BankInterest extends BaseGui{
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
         GuiCreator.ItemConfig DepositnWithdrawButton = new GuiCreator.ItemConfig(
@@ -120,6 +125,7 @@ public class BankInterest extends BaseGui{
                 true,
                 null,
                 null,
+                new ArrayList<>(),
                 null
         );
 

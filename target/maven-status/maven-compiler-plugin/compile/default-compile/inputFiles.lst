@@ -1,15 +1,18 @@
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\config\Config.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\global\Listeners.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\global\Utils.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\guis\BankDeposit.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\guis\BankGuiMain.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\guis\BankInterest.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\guis\BankWithdraw.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\Listeners\MainBankGuiListener.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\Listeners\MainDepositAndWithdrawListener.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\utils\CommandManager.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\utils\DepositChecker.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\utils\InterestObserver.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\utils\ReturnPlayerValueFormatted.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\utils\WithdrawChecker.java
-D:\Plugins {nessecary}\VickyEs Economy Plugin\src\main\java\org\vicky\vickys_EP\VickysEconomyPlugin.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\config\Config.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\Economy\BankManager.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\global\Listeners.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\global\Utils.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\guis\BankDeposit.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\guis\BankGuiMain.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\guis\BankInterest.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\guis\BankWithdraw.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\Listeners\MainBankGuiListener.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\Listeners\MainDepositAndWithdrawListener.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\CommandManager.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\Database\daos\BankAccountDAO.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\Database\templates\BankAccount.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\DepositChecker.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\InterestObserver.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\ReturnPlayerValueFormatted.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\utils\WithdrawChecker.java
+C:\Users\Java\Downloads\VickyEs-Economy-Plugin\src\main\java\org\vicky\vickys_EP\VickysEconomyPlugin.java
